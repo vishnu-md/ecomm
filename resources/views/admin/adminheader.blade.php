@@ -1,4 +1,12 @@
-<nav class="navbar navbar-default">
+<?php
+use App\Http\Controllers\ProductController;
+$total=ProductController::cartitem();
+?>
+<nav class="navbar navbar-default" style= "overflow: hidden;
+background-color: rgb(250, 245, 212);
+position: fixed;
+top: 0;
+width: 100%; z-index: 5000;">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -13,14 +21,30 @@
   
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="productlist">Products</a></li>
-          <li class=""><a href="categorylist">Categories</a></li>
+        
+          @if(auth()->user()->role_id == config('constants.ROLES.ADMIN'))
+          <ul class="nav navbar-nav">
+          <li class=""><a href="{{route('product.index')}}">Products</a></li>
+          <li class=""><a href="{{route('category.index')}}">Categories</a></li>
         </ul>
+          @endif
+          @if(auth()->user()->role_id == config('constants.ROLES.CUSTOMER'))
+          <ul class="nav navbar-nav">
+          <li class=""><a href="{{route('users.index')}}">Home</a></li>
+          <li class=""><a href="#">Orders</a></li>
+          </ul>
+         <form class="navbar-form navbar-left" action="#">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+          @endif
         
         <ul class="nav navbar-nav navbar-right">
           @if (Route::has('login'))
                     @auth
+
                      <li>   <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a></li>
                     @else
                       <li>  <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a></li>
@@ -31,7 +55,7 @@
                     @endauth
             @endif
           <li>
-                        Welcome, {{ Auth::user()->name }}
+                        Welcome!<br> {{ Auth::user()->name }}
                              
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}">
@@ -42,7 +66,10 @@
                             {{ __('Log Out') }}
                     </a>
                     </form>
+                    <li><a href="/mycart">cart({{$total}})</a></li>   
                     </div></li>
+                
+              
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

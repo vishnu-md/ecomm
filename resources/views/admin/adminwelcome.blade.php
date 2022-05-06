@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ecomm</title>
+    <title>eOricart</title>
     <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -13,16 +13,28 @@
 </head>
 <body>
     {{ View::make('admin.adminheader') }}
+    <div style="margin-top:70px">
     @yield('admin.dashboard')
     @yield('admin.productlist')
     @yield('admin.productform')
+    @yield('admin.editproduct')
     @yield('admin.categorylist')
     @yield('admin.categoryform')
+    @yield('admin.editcategory')
+    @yield('admin.userhome')
+    @yield('admin.mycart')
+    @yield('admin.ordernow')
+    @yield('admin.deliveryaddress')
+    </div>
 </body>
 <style>
     .custom-login{
         height: 500px;
         padding-top:100px;
+    }
+    .cart-list-div{
+        margin-bottom: 20px;
+        padding-bottom: 20px;
     }
     </style>
 </html>
